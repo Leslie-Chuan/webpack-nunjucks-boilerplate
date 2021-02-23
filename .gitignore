@@ -4,6 +4,7 @@ node_modules/
 coverage/
 .idea/
 run/
+output/
 .DS_Store
 *.swp
 private/

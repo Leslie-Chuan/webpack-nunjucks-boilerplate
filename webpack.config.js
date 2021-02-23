@@ -20,17 +20,18 @@ module.exports = {
   mode: 'development',
   entry,
   output: {
-    path: path.join(cwd, 'output/views'),
-    filename: '[name].[contenthash].bundle.js',
-    assetModuleFilename: 'static/[hash][ext][query]',
+    path: path.join(cwd, 'output'),
+    filename: 'public/[name].[contenthash].bundle.js',
+    assetModuleFilename: 'public/[hash][ext][query]',
+    publicPath: '/',
   },
   plugins: [
     new webpack.ProgressPlugin(),
-    new MiniCssExtractPlugin({ filename: 'main.[contenthash].css' }),
+    new MiniCssExtractPlugin({ filename: 'public/main.[contenthash].css' }),
     ...Object.keys(entry).map((chunk) => {
       const main = entry[chunk];
       return new HtmlWebpackPlugin({
-        filename: `${chunk}.html`,
+        filename: `views/${chunk}.html`,
         template: main.replace(/\.(ts|js)$/, '.html'),
         chunks: [chunk],
       });
@@ -50,9 +51,9 @@ module.exports = {
               attrs: [ ':src' ],
             }, */
           },
-          {
+          /* {
             loader: require.resolve('./loaders/nunjucks-loader'),
-          },
+          }, */
         ].filter(item => item),
       },
       {
